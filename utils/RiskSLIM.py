@@ -8,7 +8,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.utils import shuffle
 
 from pprint import pprint
-from riskslim.helper_functions import load_data_from_csv, print_model
+from riskslim.utils import load_data_from_csv, print_model
 from riskslim.setup_functions import get_conservative_offset
 from riskslim.coefficient_set import CoefficientSet
 from riskslim.lattice_cpa import run_lattice_cpa
@@ -91,6 +91,7 @@ def risk_slim(data, max_coefficient, max_L0_value, c0_value, max_offset, max_run
     
     # create coefficient set and set the value of the offset parameter
     coef_set = CoefficientSet(variable_names = data['variable_names'], lb = -max_coefficient, ub = max_coefficient, sign = 0)
+    coef_set.update_intercept_bounds(data, )
     conservative_offset = get_conservative_offset(data, coef_set, max_L0_value)
     max_offset = min(max_offset, conservative_offset)
     coef_set['(Intercept)'].ub = max_offset
