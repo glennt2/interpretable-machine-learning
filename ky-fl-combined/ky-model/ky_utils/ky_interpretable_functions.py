@@ -18,8 +18,8 @@ def EBM(KY_x, KY_y, FL_x, FL_y, learning_rate, depth, estimators, seed):
     
     ### model & parameters
     gam = ExplainableBoostingClassifier(random_state=seed)
-    c_grid = {"n_estimators": estimators, 
-              "max_tree_splits": depth, 
+    c_grid = {"outer_bags": estimators, 
+              "max_leaves": depth, 
               "learning_rate": learning_rate} 
 
     ## cross validation set up 

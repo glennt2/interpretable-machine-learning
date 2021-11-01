@@ -24,7 +24,7 @@ def XGB(KY_x, KY_y, FL_x, FL_y, learning_rate, depth, estimators, seed):
     xgboost = xgb.XGBClassifier(random_state=seed)
     c_grid = {"learning_rate": learning_rate, 
               "max_depth": depth, 
-              "n_estimators": estimators}
+              "outer_bags": estimators}
 
     ## cross validation set up 
     outer_cv = KFold(n_splits=5,shuffle=True, random_state=seed)
@@ -76,7 +76,7 @@ def RF(KY_x, KY_y, FL_x, FL_y, depth, estimators, seed):
     
     ### model & parameters
     rf = RandomForestClassifier(bootstrap=True, random_state=seed)
-    c_grid = {"n_estimators": estimators, 
+    c_grid = {"outer_bags": estimators, 
               "max_depth": depth}
     
     ## cross validation set up 

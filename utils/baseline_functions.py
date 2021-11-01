@@ -19,7 +19,7 @@ def XGB(X,Y,
     xgboost = xgb.XGBClassifier(random_state=seed)
     c_grid = {"learning_rate": learning_rate,
               "max_depth": depth,
-              "n_estimators": estimators,
+              "outer_bags": estimators,
               "gamma": gamma,
               "min_child_weight": child_weight,
               "subsample": subsample}
@@ -39,7 +39,7 @@ def RF(X, Y,
 
     ### model & parameters
     rf = RandomForestClassifier(bootstrap=True, random_state=seed)
-    c_grid = {"n_estimators": estimators,
+    c_grid = {"outer_bags": estimators,
               "max_depth": depth,
               "min_impurity_decrease": impurity}
     c_grid = {k: v for k, v in c_grid.items() if v is not None}

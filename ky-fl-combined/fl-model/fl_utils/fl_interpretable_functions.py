@@ -6,7 +6,7 @@ from sklearn.metrics import roc_auc_score
 
 
 ## GAM -- generalized additive model
-def EBM(KY_x, KY_y, FL_x, FL_y, learning_rate, depth, estimators, holdout_split, seed):
+def EBM(KY_x, KY_y, FL_x, FL_y, learning_rate, depth, estimators, validation_size, seed):
 
     KY_score = []
     FL_score = []
@@ -18,10 +18,10 @@ def EBM(KY_x, KY_y, FL_x, FL_y, learning_rate, depth, estimators, holdout_split,
     
     ### model & parameters
     gam = ExplainableBoostingClassifier(random_state=seed)
-    c_grid = {"n_estimators": estimators, 
-              "max_tree_splits": depth, 
+    c_grid = {"outer_bags": estimators, 
+              "max_leaves": depth, 
               "learning_rate": learning_rate, 
-              'holdout_split': holdout_split} 
+              'validation_size': validation_size} 
     
     ## cross validation set up 
     outer_cv = KFold(n_splits=5,shuffle=True, random_state=seed)

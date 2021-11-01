@@ -8,15 +8,15 @@ def EBM(X,Y,
         learning_rate=None, 
         depth=None,
         estimators=None, 
-        holdout_split=None, 
+        validation_size=None, 
         seed=None):
     
     ### model & parameters
     ebm = ExplainableBoostingClassifier(random_state=seed)
-    c_grid = {"n_estimators": estimators, 
-              "max_tree_splits": depth, 
+    c_grid = {"outer_bags": estimators, 
+              "max_leaves": depth, 
               "learning_rate": learning_rate, 
-              "holdout_split": holdout_split}
+              "validation_size": validation_size}
     
     c_grid = {k: v for k, v in c_grid.items() if v is not None}
         
